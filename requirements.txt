@@ -21,3 +21,5 @@ questionary
 edge-tts
 google-generativeai  
 TTS==0.22.0
+fastapi
+uvicorn

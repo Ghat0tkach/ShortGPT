@@ -4,10 +4,10 @@ from dotenv import load_dotenv
 
 load_dotenv()
 
-ELEVEN_LABS_KEY = os.getenv('ELEVEN_LABS_API_KEY')
-OPENAI_KEY = os.getenv('OPENAI_API_KEY')
-PLAY_HT_USERID = os.getenv('PLAY_HT_USERID')
-PLAY_HT_API_KEY = os.getenv('PLAY_HT_API_KEY')
+# ELEVEN_LABS_KEY = os.getenv('ELEVEN_LABS_API_KEY')
+# OPENAI_KEY = os.getenv('OPENAI_API_KEY')
+# PLAY_HT_USERID = os.getenv('PLAY_HT_USERID')
+# PLAY_HT_API_KEY = os.getenv('PLAY_HT_API_KEY')
 
 
 def read_yaml_config(file_path: str) -> dict:
