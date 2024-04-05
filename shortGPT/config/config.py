@@ -17,7 +17,7 @@ def read_yaml_config(file_path: str) -> dict:
     return contents
 
 def write_yaml_config(file_path: str, data: dict):
-    """Writes a dictionary to a YAML file"""
+    """Writes a dictionary to a YAML file"""    
     with open(file_path, 'w') as file:
         yaml.dump(data, file)
 

@@ -6,6 +6,7 @@ from time import sleep, time
 import openai
 import tiktoken
 import yaml
+import google.generativeai as genai
 
 from shortGPT.config.api_db import ApiKeyManager
 
@@ -69,8 +70,8 @@ def open_file(filepath):
         return infile.read()
 
 
-def gpt3Turbo_completion(chat_prompt="", system="You are an AI that can give the answer to anything", temp=0.7, model="gpt-3.5-turbo", max_tokens=1000, remove_nl=True, conversation=None):
-    openai.api_key = ApiKeyManager.get_api_key("OPENAI")
+def gpt3Turbo_completion(chat_prompt="", system="You are an AI that can give the answer to anything", temp=0.7, model=genai.GenerativeModel('gemini-pro'), max_tokens=1000, remove_nl=True, conversation=None):
+    genai.configure(api_key="AIzaSyB29qVHifzvGtIJcnwmPVwtw1tJ-y7NZ0I")
     max_retry = 5
     retry = 0
     while True:
@@ -79,15 +80,15 @@ def gpt3Turbo_completion(chat_prompt="", system="You are an AI that can give the
                 messages = conversation
             else:
                 messages = [
-                    {"role": "system", "content": system},
-                    {"role": "user", "content": chat_prompt}
+                     {"role": "user", "parts": ['Hello']},
+                     {"role": "model", "parts": [system]},
+                     {"role": "user", "parts": [chat_prompt]}
                 ]
-            response = openai.chat.completions.create(
-                model=model,
-                messages=messages,
-                max_tokens=max_tokens,
-                temperature=temp)
-            text = response.choices[0].message.content.strip()
+            print(messages)    
+            response = model.generate_content(
+                messages)
+            text = response.text.strip()
+            print(text)
             if remove_nl:
                 text = re.sub('\s+', ' ', text)
             filename = '%s_gpt3.txt' % time()
